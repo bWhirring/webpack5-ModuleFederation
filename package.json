@@ -1,0 +1,29 @@
+{
+  "name": "webpack5-ModuleFederation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "lerna run --parallel start"
+  },
+  "workspaces": {
+    "packages": [
+      "./packages/app1/",
+      "./packages/app2/"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bWhirring/webpack5-ModuleFederation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bWhirring/webpack5-ModuleFederation/issues"
+  },
+  "homepage": "https://github.com/bWhirring/webpack5-ModuleFederation#readme",
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
