@@ -8,7 +8,7 @@ const App = props => (
       <h1 onClick={props.test}>App2</h1>
     </div>
     <Suspense fallback={'loading...'}>
-      <AppTest1 />
+      <AppTest1 name="asdas" />
     </Suspense>
   </>
 );

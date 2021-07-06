@@ -1,16 +1,27 @@
+const packageName = require('./package.json').name;
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const { ModuleFederationPlugin } = require('webpack').container;
 const path = require('path');
 module.exports = {
   entry: { index: './src/index' },
   mode: 'development',
-  devtool: 'eval-cheap-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    port: 3001,
+    port: 3004,
+    injectClient: false,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+    historyApiFallback: true,
+    liveReload: false,
   },
   output: {
-    publicPath: 'http://localhost:3001/',
+    publicPath: 'http://localhost:3004/',
+    library: 'react16-[name]',
+    libraryTarget: 'umd',
+    chunkLoadingGlobal: 'webpackJsonp_react16',
+    globalObject: 'window',
   },
   module: {
     rules: [
@@ -25,22 +36,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new ModuleFederationPlugin({
-      name: 'app1',
-      library: { type: 'var', name: 'app1' },
-      filename: 'remoteEntry.js',
-      exposes: {
-        './Test1': './src/Test1',
-      },
-      remotes: {
-        app2: 'app2',
-      },
-      shared: {
-        react: { singleton: true, eager: true, requiredVersion: '^17.0.2' },
-        'react-dom': { singleton: true, eager: true, requiredVersion: '^17.0.2' },
-      },
-    }),
-
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
